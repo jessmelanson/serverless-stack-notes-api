@@ -74,3 +74,4 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+
