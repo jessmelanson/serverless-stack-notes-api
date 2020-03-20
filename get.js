@@ -1,10 +1,17 @@
 import { call } from './lib/db';
 import { success, failure } from './lib/response';
 
-export const main = async (event, context) => {
-  const { pathParameters, requestContext } = event;
-  const { id: noteId } = pathParameters;
-  const { cognitoIdentityId: userId } = requestContext.identity;
+export const main = async event => {
+  const {
+    pathParameters: {
+      id: noteId
+    },
+    requestContext: {
+      identity: {
+        cognitoIdentityId: userId
+      }
+    }
+  } = event;
 
   const params = {
     TableName: process.env.tableName,

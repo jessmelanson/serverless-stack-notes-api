@@ -2,9 +2,15 @@ import uuid from 'uuid';
 import { call } from './lib/db';
 import { success, failure } from './lib/response';
 
-export const main = async (event, context, callback) => {
-  const { body, requestContext } = event;
-  const { cognitoIdentityId: userId } = requestContext.identity;
+export const main = async event => {
+  const {
+    body,
+    requestContext: {
+      identity: {
+        cognitoIdentityId: userId
+      }
+    }
+  } = event;
   const { attachment, content } = JSON.parse(body);
 
   const params = {
