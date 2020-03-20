@@ -8,7 +8,8 @@
     "create": "serverless invoke local --function create --path mocks/create-event.json",
     "get": "serverless invoke local --function get --path mocks/get-event.json",
     "list": "serverless invoke local --function list --path mocks/list-event.json",
-    "update": "serverless invoke local --function update --path mocks/update-event.json"
+    "update": "serverless invoke local --function update --path mocks/update-event.json",
+    "delete": "serverless invoke local --function delete --path mocks/delete-event.json"
   },
   "author": "",
   "license": "MIT",
