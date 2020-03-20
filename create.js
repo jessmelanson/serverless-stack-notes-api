@@ -1,9 +1,8 @@
 import uuid from 'uuid';
-import AWS from 'aws-sdk';
+import { call } from './lib/db';
+import { success, failure } from './lib/response';
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-export const main = (event, context, callback) => {
+export const main = async (event, context, callback) => {
   const { body, requestContext } = event;
   const { cognitoIdentityId } = requestContext.identity;
   const { attachment, content } = JSON.parse(body);
@@ -27,30 +26,10 @@ export const main = (event, context, callback) => {
     }
   };
 
-  dynamoDb.put(params, (err, data) => {
-    // Set response headers to enable CORS (Cross-Origin Resource Sharing)
-    const headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true
-    };
-
-    // Return status code 500 on error
-    if (err) {
-      const res = {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ status: false })
-      };
-      callback(null, res);
-      return;
-    }
-
-    // Return status code 200 and the newly created item
-    const res = {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify(params.Item)
-    };
-    callback(null, res);
-  });
+  try {
+    await call('put', params);
+    return success(params.Item);
+  } catch(e) {
+    return failure({ status: false });
+  }
 };
