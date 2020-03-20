@@ -4,7 +4,7 @@ import { success, failure } from './lib/response';
 
 export const main = async (event, context, callback) => {
   const { body, requestContext } = event;
-  const { cognitoIdentityId } = requestContext.identity;
+  const { cognitoIdentityId: userId } = requestContext.identity;
   const { attachment, content } = JSON.parse(body);
 
   const params = {
@@ -18,7 +18,7 @@ export const main = async (event, context, callback) => {
     // - 'attachment': parsed from request body
     // - 'createdAt': current Unix timestamp
     Item: {
-      userId: cognitoIdentityId,
+      userId,
       noteId: uuid(),
       content: content,
       attachment: attachment,

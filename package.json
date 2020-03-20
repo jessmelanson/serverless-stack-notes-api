@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "serverless-bundle test",
-    "create": "serverless invoke local --function create --path mocks/create-event.json"
+    "create": "serverless invoke local --function create --path mocks/create-event.json",
+    "get": "serverless invoke local --function get --path mocks/get-event.json"
   },
   "author": "",
   "license": "MIT",
