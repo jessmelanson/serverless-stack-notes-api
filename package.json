@@ -9,7 +9,8 @@
     "get": "serverless invoke local --function get --path mocks/get-event.json",
     "list": "serverless invoke local --function list --path mocks/list-event.json",
     "update": "serverless invoke local --function update --path mocks/update-event.json",
-    "delete": "serverless invoke local --function delete --path mocks/delete-event.json"
+    "delete": "serverless invoke local --function delete --path mocks/delete-event.json",
+    "billing": "serverless invoke local --function billing --path mocks/billing-event.json"
   },
   "author": "",
   "license": "MIT",
@@ -24,6 +25,7 @@
     "serverless-offline": "^5.3.3"
   },
   "dependencies": {
+    "stripe": "^8.33.0",
     "uuid": "^3.4.0"
   }
 }
